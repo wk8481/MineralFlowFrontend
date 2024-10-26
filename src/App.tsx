@@ -1,5 +1,7 @@
 import {BrowserRouter, Link, Navigate, Route, Routes} from 'react-router-dom';
 import TruckTable from './components/TruckTable';
+import Dashboard from './components/Dashboard';
+import TruckOnSiteCounter from './components/TruckOnSiteCounter';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import SecurityContextProvider from './context/SecurityContextProvider';
 import {RouteGuard} from './components/RouteGuard';
@@ -10,7 +12,7 @@ import {createTheme, CssBaseline, ThemeProvider} from '@mui/material';
 const queryClient = new QueryClient();
 const theme = createTheme({
     palette: {
-        mode: 'light', // or 'dark' for dark mode
+        mode: 'dark', // or 'light' for light mode
     },
 });
 
@@ -34,13 +36,16 @@ function App() {
                         <Header/>
                         <nav>
                             <ul>
-                                <li><Link to="/">Home</Link></li>
+                                <li><Link to="/">Dashboard</Link></li>
                                 <li><Link to="/trucks">Trucks</Link></li>
+                                <li><Link to="/trucks-on-site">Trucks On-Site</Link></li>
                             </ul>
                         </nav>
                         <Routes>
+                            <Route path="/" element={<Dashboard/>}/>
                             <Route path="/trucks" element={<RouteGuard><TruckTable/></RouteGuard>}/>
-                            <Route path="/" element={<Navigate to="/trucks"/>}/>
+                            <Route path="/trucks-on-site" element={<RouteGuard><TruckOnSiteCounter/></RouteGuard>}/>
+                            <Route path="*" element={<Navigate to="/"/>}/>
                         </Routes>
                     </BrowserRouter>
                 </ThemeProvider>

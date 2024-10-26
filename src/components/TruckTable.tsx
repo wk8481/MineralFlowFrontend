@@ -12,16 +12,16 @@ import {
     TableRow,
     Typography
 } from '@mui/material';
-import {useTrucks} from '../hooks/useTrucks';
+import {useTrucksOnTime} from '../hooks/useTrucksOnTime.ts';
 
 const TruckTable: React.FC = () => {
-    const {trucks, isLoading, isError} = useTrucks();
+    const {trucks, isLoading, isError} = useTrucksOnTime();
 
     if (isLoading) {
         return <CircularProgress/>;
     }
 
-    if (isError || !trucks) {
+    if (isError || !Array.isArray(trucks)) {
         return <Alert severity="error">Error loading trucks!</Alert>;
     }
 
