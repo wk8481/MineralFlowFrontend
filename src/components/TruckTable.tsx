@@ -1,8 +1,8 @@
-import React from 'react';
 import {
     Alert,
     Box,
     Card,
+    CardMedia,
     CircularProgress,
     Container,
     Table,
@@ -12,10 +12,11 @@ import {
     TableRow,
     Typography
 } from '@mui/material';
-import {useTrucksOnTime} from '../hooks/useTrucksOnTime.ts';
+import truckImage from '../assets/img/truck.png';
+import {useTrucksOnTime} from '../hooks/useTrucksOnTime';
 
-const TruckTable: React.FC = () => {
-    const {trucks, isLoading, isError} = useTrucksOnTime();
+function TruckTable() {
+    const {isLoading, isError, trucks} = useTrucksOnTime();
 
     if (isLoading) {
         return <CircularProgress/>;
@@ -40,6 +41,7 @@ const TruckTable: React.FC = () => {
                                 <TableCell>Material Type</TableCell>
                                 <TableCell>Arrival Time</TableCell>
                                 <TableCell>On Time</TableCell>
+                                <TableCell>Truck Image</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -50,6 +52,19 @@ const TruckTable: React.FC = () => {
                                     <TableCell>{truck.materialType}</TableCell>
                                     <TableCell>{truck.arrivalTime}</TableCell>
                                     <TableCell>{truck.onTime ? 'Yes' : 'No'}</TableCell>
+                                    <TableCell>
+                                        <CardMedia
+                                            component="img"
+                                            image={truckImage}
+                                            alt="Truck"
+                                            sx={{
+                                                height: 50,
+                                                width: 100,
+                                                backgroundColor: truck.onTime ? 'green' :
+                                                    !truck.onTime ? 'red' : 'orange'
+                                            }}
+                                        />
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -58,6 +73,6 @@ const TruckTable: React.FC = () => {
             </Box>
         </Container>
     );
-};
+}
 
 export default TruckTable;

@@ -1,9 +1,11 @@
-import React from 'react';
-import {usePurchaseOrders} from '../hooks/usePurchaseOrders';
+// src/components/PurchaseOrderList.tsx
 import {Alert, Box, Card, CardContent, CircularProgress, Typography} from '@mui/material';
+import {Link} from 'react-router-dom';
+import poImage from '../assets/img/po.png'; // Adjust the path as necessary
+import {usePurchaseOrders} from '../hooks/usePurchaseOrders';
 
-const PurchaseOrderList: React.FC = () => {
-    const {purchaseOrders, isLoading, isError} = usePurchaseOrders();
+function PurchaseOrderList() {
+    const {isLoading, isError, purchaseOrders} = usePurchaseOrders();
 
     if (isLoading) {
         return <CircularProgress/>;
@@ -18,7 +20,7 @@ const PurchaseOrderList: React.FC = () => {
             <Typography variant="h4" component="h1" gutterBottom>
                 Purchase Orders
             </Typography>
-            {purchaseOrders?.map((order) => (
+            {purchaseOrders.map((order) => (
                 <Card
                     key={order.poNumber}
                     sx={{
@@ -39,21 +41,14 @@ const PurchaseOrderList: React.FC = () => {
                         <Typography variant="body1">
                             Status: {order.status}
                         </Typography>
-                        <Typography variant="body1">
-                            Order Lines:
-                        </Typography>
-                        <ul>
-                            {order.orderLines.map((line, index) => (
-                                <li key={index}>
-                                    {line.materialType}: {line.amountInTons} tons @ ${line.pricePerTon}/ton
-                                </li>
-                            ))}
-                        </ul>
+                        <Link to={`/purchase-orders/${order.poNumber}`}>
+                            <img src={poImage} alt="Purchase Order" style={{height: 50, width: 50}}/>
+                        </Link>
                     </CardContent>
                 </Card>
             ))}
         </Box>
     );
-};
+}
 
 export default PurchaseOrderList;
