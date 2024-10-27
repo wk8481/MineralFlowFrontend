@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {TruckOnTime} from '../model/TruckOnTime';
+import {PurchaseOrder} from "../model/PurchaseOrders.ts";
 
 const LANDSIDE_URL: string = import.meta.env.VITE_LANDSIDE_URL;
 
@@ -27,11 +28,22 @@ export async function getTrucksOnSite() {
 
 export async function getPurchaseOrders() {
     try {
-        const {data: purchaseOrders} = await axios.get<string[]>(`${LANDSIDE_URL}/purchase-orders`);
+        const {data: purchaseOrders} = await axios.get<PurchaseOrder[]>(`${LANDSIDE_URL}/purchase-orders`);
         console.log('Fetched purchase orders:', purchaseOrders);
         return purchaseOrders;
     } catch (error) {
         console.error('Error fetching purchase orders:', error);
+        throw error;
+    }
+}
+
+export async function getPurchaseOrder(poNumber: string): Promise<PurchaseOrder> {
+    try {
+        const {data: purchaseOrder} = await axios.get<PurchaseOrder>(`${LANDSIDE_URL}/purchase-orders/${poNumber}`);
+        console.log('Fetched purchase order:', purchaseOrder);
+        return purchaseOrder;
+    } catch (error) {
+        console.error('Error fetching purchase order:', error);
         throw error;
     }
 }

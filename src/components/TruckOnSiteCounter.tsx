@@ -1,13 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useTrucksOnSite} from '../hooks/useTrucksOnSite';
 import {Alert, Box, Card, CardContent, CircularProgress, Typography} from '@mui/material';
 
-const TruckOnSiteCounter: React.FC = () => {
+function TruckOnSiteCounter() {
     const {trucks, isLoading, isError} = useTrucksOnSite();
     const [totalTrucks, setTotalTrucks] = useState<number>(0);
 
     useEffect(() => {
         if (trucks) {
+            console.log('Trucks array:', trucks);
+            console.log('Trucks length:', trucks.length);
             setTotalTrucks(trucks.length);
         }
     }, [trucks]);
@@ -34,6 +36,6 @@ const TruckOnSiteCounter: React.FC = () => {
             </Card>
         </Box>
     );
-};
+}
 
 export default TruckOnSiteCounter;
