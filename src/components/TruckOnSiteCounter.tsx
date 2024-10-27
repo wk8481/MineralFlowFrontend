@@ -24,12 +24,20 @@ function TruckOnSiteCounter() {
 
     return (
         <Box my={4} display="flex" justifyContent="center">
-            <Card>
+            <Card
+                sx={{
+                    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+                    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+                    padding: 2,
+                    borderRadius: 2,
+                    textAlign: 'center',
+                }}
+            >
                 <CardContent>
                     <Typography variant="h4" component="h1" gutterBottom>
                         Total Trucks On-Site
                     </Typography>
-                    <Typography variant="h2" component="p">
+                    <Typography variant="h2" component="p" sx={{fontWeight: 'bold'}}>
                         {totalTrucks}
                     </Typography>
                 </CardContent>

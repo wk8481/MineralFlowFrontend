@@ -1,4 +1,3 @@
-// src/App.tsx
 import {BrowserRouter, Link, Navigate, Route, Routes} from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import TruckOnSiteCounter from './components/TruckOnSiteCounter';
@@ -10,12 +9,37 @@ import SecurityContext from './context/SecurityContext';
 import {createTheme, CssBaseline, ThemeProvider} from '@mui/material';
 import PurchaseOrderList from './components/PurchaseOrderList';
 import PurchaseOrderDetails from './components/PurchaseOrderDetails';
-import TruckTable from "./components/TruckTable.tsx";
+import TruckTable from "./components/TruckTable";
+import TruckDetails from "./components/TruckDetails"; // Import the new component
 
 const queryClient = new QueryClient();
 const theme = createTheme({
     palette: {
-        mode: 'dark', // or 'light' for light mode
+        mode: 'dark',
+        background: {
+            default: '#121212',
+            paper: '#1d1d1d',
+        },
+        primary: {
+            main: '#bb86fc',
+        },
+        secondary: {
+            main: '#03dac6',
+        },
+    },
+    components: {
+        MuiCssBaseline: {
+            styleOverrides: {
+                body: {
+                    background: 'linear-gradient(135deg, #1d1d1d 30%, #121212 90%)',
+                    minHeight: '100vh',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                },
+            },
+        },
     },
 });
 
@@ -37,12 +61,13 @@ function App() {
                     <CssBaseline/>
                     <BrowserRouter>
                         <Header/>
-                        <nav>
-                            <ul>
-                                <li><Link to="/">Dashboard</Link></li>
-                                <li><Link to="/trucks">Trucks</Link></li>
-                                <li><Link to="/trucks-on-site">Trucks On-Site</Link></li>
-                                <li><Link to="/purchase-orders">Purchase Orders</Link></li>
+                        <nav style={{display: 'flex', justifyContent: 'center'}}>
+                            <ul style={{display: 'flex', listStyle: 'none', padding: 0}}>
+                                <li style={{marginRight: '1rem'}}><Link to="/">Dashboard</Link></li>
+                                <li style={{marginRight: '1rem'}}><Link to="/trucks">Trucks</Link></li>
+                                <li style={{marginRight: '1rem'}}><Link to="/trucks-on-site">Trucks On-Site</Link></li>
+                                <li style={{marginRight: '1rem'}}><Link to="/purchase-orders">Purchase Orders</Link>
+                                </li>
                             </ul>
                         </nav>
                         <Routes>
@@ -52,6 +77,8 @@ function App() {
                             <Route path="/purchase-orders" element={<RouteGuard><PurchaseOrderList/></RouteGuard>}/>
                             <Route path="/purchase-orders/:poNumber"
                                    element={<RouteGuard><PurchaseOrderDetails/></RouteGuard>}/>
+                            <Route path="/trucks/:licensePlate"
+                                   element={<RouteGuard><TruckDetails/></RouteGuard>}/> {/* New route */}
                             <Route path="*" element={<Navigate to="/"/>}/>
                         </Routes>
                     </BrowserRouter>

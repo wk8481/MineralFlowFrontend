@@ -25,7 +25,7 @@ function PurchaseOrderList() {
                     key={order.poNumber}
                     sx={{
                         marginBottom: 2,
-                        backgroundColor: order.status === 'FULFILLED' ? 'lightgreen' : 'lightcoral'
+                        backgroundColor: order.status === 'FULFILLED' ? '#006400' : 'lightcoral'
                     }}
                 >
                     <CardContent>

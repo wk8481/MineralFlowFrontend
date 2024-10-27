@@ -1,5 +1,5 @@
 import {useQuery} from '@tanstack/react-query';
-import {getTrucksOnTime} from '../services/backend.ts';
+import {getTruckOnTime, getTrucksOnTime} from '../services/backend.ts';
 
 export function useTrucksOnTime() {
     const {isLoading, isError, data: trucks} = useQuery({
@@ -15,5 +15,22 @@ export function useTrucksOnTime() {
         isLoading,
         isError,
         trucks,
+    };
+}
+
+export function useTruckOnTime(licensePlate: string) {
+    const {isLoading, isError, data: truck} = useQuery({
+        queryKey: ['truck', licensePlate],
+        queryFn: () => getTruckOnTime(licensePlate),
+    });
+
+    console.log('isLoading:', isLoading);
+    console.log('isError:', isError);
+    console.log('truck:', truck);
+
+    return {
+        isLoading,
+        isError,
+        truck,
     };
 }

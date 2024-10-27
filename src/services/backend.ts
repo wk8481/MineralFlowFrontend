@@ -15,6 +15,17 @@ export async function getTrucksOnTime() {
     }
 }
 
+export async function getTruckOnTime(licensePlate: string): Promise<TruckOnTime> {
+    try {
+        const {data: truckOnTime} = await axios.get<TruckOnTime>(`${BACKEND_URL}/check-arrival/${licensePlate}`);
+        console.log('Fetched truck:', truckOnTime);
+        return truckOnTime;
+    } catch (error) {
+        console.error('Error fetching truck:', error);
+        throw error;
+    }
+}
+
 export async function getTrucksOnSite() {
     try {
         const {data: trucksOnSite} = await axios.get<string[]>(`${BACKEND_URL}/trucks-on-site`);
