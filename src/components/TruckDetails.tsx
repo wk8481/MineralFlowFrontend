@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import {Alert, Box, Card, CardContent, CircularProgress, Typography} from '@mui/material';
 import {getTruckOnTime} from '../services/backend';
 import {TruckOnTime} from '../model/TruckOnTime';
+import dayjs from 'dayjs';
 
 function TruckDetails() {
     const {licensePlate} = useParams();
@@ -47,10 +48,16 @@ function TruckDetails() {
                         Material Type: {truck.materialType}
                     </Typography>
                     <Typography variant="body1">
-                        Arrival Time: {new Date(truck.arrivalTime).toLocaleString()}
+                        Arrival Time: {dayjs(truck.arrivalTime).format('YYYY-MM-DD HH:mm')}
                     </Typography>
                     <Typography variant="body1">
                         On Time: {truck.onTime ? 'Yes' : 'No'}
+                    </Typography>
+                    <Typography variant="body1">
+                        Schedule Start: {dayjs(truck.windowStart).format('YYYY-MM-DD HH:mm')}
+                    </Typography>
+                    <Typography variant="body1">
+                        Schedule End: {dayjs(truck.windowEnd).format('YYYY-MM-DD HH:mm')}
                     </Typography>
                 </CardContent>
             </Card>

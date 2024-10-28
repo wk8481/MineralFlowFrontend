@@ -1,0 +1,13 @@
+/* src/components/Dashboard.scss */
+.dashboard-card {
+  margin-bottom: 1rem;
+  background-color: #1d1d1d;
+  color: #bb86fc;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #333;
+  }
+}

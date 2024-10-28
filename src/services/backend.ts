@@ -1,6 +1,8 @@
 import axios from 'axios';
 import {TruckOnTime} from '../model/TruckOnTime';
 import {PurchaseOrder} from "../model/PurchaseOrders.ts";
+import {Warehouse} from "../model/Warehouses.ts";
+import {Appointment} from "../model/Appointments.ts";
 
 const BACKEND_URL: string = import.meta.env.VITE_BACKEND_URL;
 
@@ -55,6 +57,40 @@ export async function getPurchaseOrder(poNumber: string): Promise<PurchaseOrder>
         return purchaseOrder;
     } catch (error) {
         console.error('Error fetching purchase order:', error);
+        throw error;
+    }
+}
+
+export async function getWarehouses(): Promise<Warehouse[]> {
+    try {
+        const {data: warehouses} = await axios.get<Warehouse[]>(`${BACKEND_URL}/total-material`);
+        console.log('Fetched warehouses:', warehouses);
+        return warehouses;
+    } catch (error) {
+        console.error('Error fetching warehouses:', error);
+        throw error;
+    }
+}
+
+
+export async function getWarehouse(warehouseId: string | undefined): Promise<Warehouse> {
+    try {
+        const {data: warehouse} = await axios.get<Warehouse>(`${BACKEND_URL}/total-material/${warehouseId}`);
+        console.log('Fetched warehouse:', warehouse);
+        return warehouse;
+    } catch (error) {
+        console.error('Error fetching warehouse:', error);
+        throw error;
+    }
+}
+
+
+export async function makeAppointment(appointment: Appointment) {
+    try {
+        const response = await axios.post(`${BACKEND_URL}/make-appointment`, appointment);
+        return response.data;
+    } catch (error) {
+        console.error('Error making appointment:', error);
         throw error;
     }
 }

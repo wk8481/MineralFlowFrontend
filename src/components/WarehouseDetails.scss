@@ -1,0 +1,16 @@
+/* src/components/WarehouseDetails.scss */
+.warehouse-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  border-radius: 8px;
+  color: white;
+  margin-top: 1rem;
+}
+
+.material, .capacity, .seller {
+  margin: 0.5rem 0;
+}

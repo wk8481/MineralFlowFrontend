@@ -1,3 +1,4 @@
+// src/App.tsx
 import {BrowserRouter, Link, Navigate, Route, Routes} from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import TruckOnSiteCounter from './components/TruckOnSiteCounter';
@@ -10,7 +11,10 @@ import {createTheme, CssBaseline, ThemeProvider} from '@mui/material';
 import PurchaseOrderList from './components/PurchaseOrderList';
 import PurchaseOrderDetails from './components/PurchaseOrderDetails';
 import TruckTable from "./components/TruckTable";
-import TruckDetails from "./components/TruckDetails"; // Import the new component
+import TruckDetails from "./components/TruckDetails";
+import WarehouseList from './components/WarehouseList';
+import WarehouseDetails from './components/WarehouseDetails';
+import {AppointmentForm} from './components/AppointmentForm'; // Import the component
 
 const queryClient = new QueryClient();
 const theme = createTheme({
@@ -68,6 +72,10 @@ function App() {
                                 <li style={{marginRight: '1rem'}}><Link to="/trucks-on-site">Trucks On-Site</Link></li>
                                 <li style={{marginRight: '1rem'}}><Link to="/purchase-orders">Purchase Orders</Link>
                                 </li>
+                                <li style={{marginRight: '1rem'}}><Link to="/warehouses">Warehouses</Link></li>
+                                <li style={{marginRight: '1rem'}}><Link to="/appointment-form">Schedule
+                                    Appointment</Link></li>
+                                {/* Add link */}
                             </ul>
                         </nav>
                         <Routes>
@@ -77,8 +85,12 @@ function App() {
                             <Route path="/purchase-orders" element={<RouteGuard><PurchaseOrderList/></RouteGuard>}/>
                             <Route path="/purchase-orders/:poNumber"
                                    element={<RouteGuard><PurchaseOrderDetails/></RouteGuard>}/>
-                            <Route path="/trucks/:licensePlate"
-                                   element={<RouteGuard><TruckDetails/></RouteGuard>}/> {/* New route */}
+                            <Route path="/trucks/:licensePlate" element={<RouteGuard><TruckDetails/></RouteGuard>}/>
+                            <Route path="/warehouses" element={<RouteGuard><WarehouseList/></RouteGuard>}/>
+                            <Route path="/warehouses/:warehouseId"
+                                   element={<RouteGuard><WarehouseDetails/></RouteGuard>}/>
+                            <Route path="/appointment-form"
+                                   element={<RouteGuard><AppointmentForm/></RouteGuard>}/> {/* Add route */}
                             <Route path="*" element={<Navigate to="/"/>}/>
                         </Routes>
                     </BrowserRouter>
