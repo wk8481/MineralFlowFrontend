@@ -31,8 +31,9 @@ function TruckTable() {
         return <Alert severity="error">Error loading trucks!</Alert>;
     }
 
+    // Filter trucks by both date and time (down to the minute)
     const filteredTrucks = trucks.filter(truck =>
-        dayjs(truck.windowStart).isSame(selectedDate, 'day')
+        dayjs(truck.windowStart).isSame(selectedDate, 'minute')
     );
 
     return (
