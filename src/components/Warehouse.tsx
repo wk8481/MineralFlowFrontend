@@ -18,7 +18,7 @@ export function Warehouse({warehouse, isSelected}: WarehouseProps) {
     } else if (fullness > 100) {
         backgroundColor = 'orange';
     } else if (fullness > 80) {
-        backgroundColor = 'yellow';
+        backgroundColor = '#b8860b'; // Darker yellow
     }
 
     return (
