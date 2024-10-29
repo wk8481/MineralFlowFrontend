@@ -3,7 +3,7 @@ import {getTruckOnTime, getTrucksOnTime} from '../services/backend.ts';
 
 export function useTrucksOnTime() {
     const {isLoading, isError, data: trucks} = useQuery({
-        queryKey: ['trucks'],
+        queryKey: ['trucksOnTime'],
         queryFn: () => getTrucksOnTime(),
     });
 

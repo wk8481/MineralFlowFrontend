@@ -1,27 +1,11 @@
 import {useParams} from 'react-router-dom';
-import {useEffect, useState} from 'react';
 import {Alert, Box, Card, CardContent, CircularProgress, Typography} from '@mui/material';
-import {getTruckOnTime} from '../services/backend';
-import {TruckOnTime} from '../model/TruckOnTime';
+import {useTruckOnTime} from '../hooks/useTrucksOnTime';
 import dayjs from 'dayjs';
 
 function TruckDetails() {
     const {licensePlate} = useParams();
-    const [truck, setTruck] = useState<TruckOnTime | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isError, setIsError] = useState(false);
-
-    useEffect(() => {
-        getTruckOnTime(licensePlate!)
-            .then(data => {
-                setTruck(data);
-                setIsLoading(false);
-            })
-            .catch(() => {
-                setIsError(true);
-                setIsLoading(false);
-            });
-    }, [licensePlate]);
+    const {isLoading, isError, truck} = useTruckOnTime(licensePlate!);
 
     if (isLoading) {
         return <CircularProgress/>;

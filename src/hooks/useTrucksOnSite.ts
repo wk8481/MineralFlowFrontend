@@ -3,7 +3,7 @@ import {getTrucksOnSite} from "../services/backend.ts";
 
 export function useTrucksOnSite() {
     const {isLoading, isError, data: trucks} = useQuery({
-        queryKey: ['trucks'],
+        queryKey: ['trucksOnSite'],
         queryFn: () => getTrucksOnSite(),
     });
 

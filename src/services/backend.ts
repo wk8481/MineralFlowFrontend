@@ -3,6 +3,7 @@ import {TruckOnTime} from '../model/TruckOnTime';
 import {PurchaseOrder} from "../model/PurchaseOrders.ts";
 import {Warehouse} from "../model/Warehouses.ts";
 import {Appointment} from "../model/Appointments.ts";
+import {TruckOnSite} from "../model/TruckOnSite.ts";
 
 const BACKEND_URL: string = import.meta.env.VITE_BACKEND_URL;
 
@@ -28,9 +29,10 @@ export async function getTruckOnTime(licensePlate: string): Promise<TruckOnTime>
     }
 }
 
+// src/services/backend.ts
 export async function getTrucksOnSite() {
     try {
-        const {data: trucksOnSite} = await axios.get<string[]>(`${BACKEND_URL}/trucks-on-site`);
+        const {data: trucksOnSite} = await axios.get<TruckOnSite[]>(`${BACKEND_URL}/trucks-on-site`);
         console.log('Fetched trucks:', trucksOnSite);
         return trucksOnSite;
     } catch (error) {
