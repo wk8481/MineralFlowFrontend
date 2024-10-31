@@ -5,8 +5,8 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  width: 350px; /* Increased width */
-  height: 220px; /* Increased height */
+  width: 350px;
+  height: 220px;
   margin: 10px;
   border: 1px solid black;
   border-radius: 8px;
@@ -15,35 +15,6 @@
   box-sizing: border-box;
   cursor: pointer;
   background-color: #1d1d1d;
-}
-
-.warehouse::after {
-  content: '';
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  background-image: url('../assets/img/warehouse.png'); /* Add background image */
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.warehouse-number {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.warehouse-details {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-}
-
-.material, .capacity, .seller {
-  margin: 0.2rem 0;
-  font-size: 0.8rem;
 }
 
 .warehouse.selected {

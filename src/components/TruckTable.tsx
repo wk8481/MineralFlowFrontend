@@ -14,7 +14,7 @@ import {
 import {Link} from 'react-router-dom';
 import {DateTimePicker, LocalizationProvider} from '@mui/x-date-pickers';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import dayjs, {Dayjs} from 'dayjs';
 import truckImage from '../assets/img/truck.png';
 import {useTrucksOnTime} from '../hooks/useTrucksOnTime';
@@ -22,6 +22,19 @@ import {useTrucksOnTime} from '../hooks/useTrucksOnTime';
 function TruckTable() {
     const {isLoading, isError, trucks} = useTrucksOnTime();
     const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
+    const [totalTrucks, setTotalTrucks] = useState<number>(0);
+    const [onTimeTrucks, setOnTimeTrucks] = useState<number>(0);
+
+    // Filter trucks by both date and time (down to the minute)
+    const filteredTrucks = trucks?.filter(truck =>
+        dayjs(truck.windowStart).isSame(selectedDate, 'minute')
+    ) || [];
+
+    // Update the counts whenever the trucks or selected date changes
+    useEffect(() => {
+        setTotalTrucks(filteredTrucks.length);
+        setOnTimeTrucks(filteredTrucks.filter(truck => truck.onTime).length);
+    }, [filteredTrucks]);
 
     if (isLoading) {
         return <CircularProgress/>;
@@ -30,11 +43,6 @@ function TruckTable() {
     if (isError || !Array.isArray(trucks)) {
         return <Alert severity="error">Error loading trucks!</Alert>;
     }
-
-    // Filter trucks by both date and time (down to the minute)
-    const filteredTrucks = trucks.filter(truck =>
-        dayjs(truck.windowStart).isSame(selectedDate, 'minute')
-    );
 
     return (
         <Container>
@@ -49,6 +57,15 @@ function TruckTable() {
                         onChange={(newValue) => setSelectedDate(newValue)}
                     />
                 </LocalizationProvider>
+
+                {/* Display total trucks and on-time trucks */}
+                <Typography variant="h6" gutterBottom>
+                    Total Trucks: {totalTrucks}
+                </Typography>
+                <Typography variant="h6" gutterBottom>
+                    On Time Trucks: {onTimeTrucks}
+                </Typography>
+
                 <Table>
                     <TableHead>
                         <TableRow>

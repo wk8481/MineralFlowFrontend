@@ -1,50 +1,185 @@
-# React + TypeScript + Vite
+# Frontend Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a frontend application built with React, TypeScript, and Vite. It uses various hooks, services,
+contexts, and components to manage state, fetch data, and render the UI. The project also integrates Material-UI (MUI)
+for styling and SCSS for custom styles.
 
-Currently, two official plugins are available:
+## Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **src**
+    - **components**: Contains all the React components used in the project.
+    - **context**: Contains context providers for managing global state.
+    - **hooks**: Contains custom hooks for data fetching and state management.
+    - **model**: Contains TypeScript types and interfaces.
+    - **services**: Contains functions for making API calls.
+    - **App.tsx**: The main application component.
+    - **index.tsx**: The entry point of the application.
 
-## Expanding the ESLint configuration
+## How to Run the Project
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. **Install Dependencies**: Run `npm install` to install all the required dependencies.
+2. **Start Development Server**: Run `npm run dev` to start the development server.
+3. **Build for Production**: Run `npm run build` to build the project for production.
+4. **Preview Production Build**: Run `npm run preview` to preview the production build.
 
-- Configure the top-level `parserOptions` property like this:
+## Services
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **backend.ts**: Contains functions for making API calls to the backend using `axios`.
+    - `getTrucksOnTime()`: Fetches trucks on time data.
+    - `getTruckOnTime(licensePlate: string)`: Fetches details of a specific truck.
+    - `getTrucksOnSite()`: Fetches trucks on site data.
+    - `getPurchaseOrders()`: Fetches purchase orders data.
+    - `getPurchaseOrder(poNumber: string)`: Fetches details of a specific purchase order.
+    - `getWarehouses()`: Fetches warehouses data.
+    - `getWarehouse(warehouseId: string)`: Fetches details of a specific warehouse.
+    - `makeAppointment(appointment: Appointment)`: Schedules an appointment.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Hooks
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- **useTrucksOnTime.ts**: Custom hook for fetching trucks on time data.
+- **useTrucksOnSite.ts**: Custom hook for fetching trucks on site data.
+- **usePurchaseOrders.ts**: Custom hook for fetching purchase orders data.
+- **useWarehouses.ts**: Custom hook for fetching warehouses data.
+- **useAddAppointment.ts**: Custom hook for adding appointments.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Contexts
+
+- **SecurityContext.ts**: Provides authentication state and functions.
+- **SecurityContextProvider.tsx**: Context provider for managing authentication state.
+
+## Components
+
+- **Dashboard.tsx**
+    - **Purpose**: Displays an overview of trucks, purchase orders, and warehouses.
+    - **Methods**:
+        - `useDashboardData()`: Fetches data for trucks on time, trucks on site, purchase orders, and warehouses.
+        - `useEffect()`: Handles loading and error states.
+
+- **TruckTable.tsx**
+    - **Purpose**: Displays a table of trucks on time.
+    - **Methods**:
+        - `useTrucksOnTime()`: Fetches trucks on time data.
+        - `useState()`: Manages local state for selected date, total trucks, and on-time trucks.
+        - `useEffect()`: Updates truck counts based on selected date and fetched data.
+
+- **TruckDetails.tsx**
+    - **Purpose**: Displays details of a specific truck.
+    - **Methods**:
+        - `useTruckOnTime()`: Fetches details of a specific truck based on its license plate.
+        - `useParams()`: Retrieves the truck's license plate from the URL.
+
+- **TruckOnSiteCounter.tsx**
+    - **Purpose**: Displays the count of trucks on site.
+    - **Methods**:
+        - `useTrucksOnSite()`: Fetches trucks on site data.
+        - `useState()`: Manages local state for total trucks.
+        - `useEffect()`: Updates the total truck count based on fetched data.
+
+- **WarehouseList.tsx**
+    - **Purpose**: Displays a list of warehouses.
+    - **Methods**:
+        - `useWarehouses()`: Fetches warehouses data.
+        - `useState()`: Manages local state for selected seller.
+        - `useEffect()`: Handles loading and error states.
+
+- **WarehouseDetails.tsx**
+    - **Purpose**: Displays details of a specific warehouse.
+    - **Methods**:
+        - `useWarehouse()`: Fetches details of a specific warehouse based on its ID.
+        - `useParams()`: Retrieves the warehouse ID from the URL.
+
+- **PurchaseOrderList.tsx**
+    - **Purpose**: Displays a list of purchase orders.
+    - **Methods**:
+        - `usePurchaseOrders()`: Fetches purchase orders data.
+        - `useState()`: Manages local state for selected status.
+        - `useEffect()`: Handles loading and error states.
+
+- **PurchaseOrderDetails.tsx**
+    - **Purpose**: Displays details of a specific purchase order.
+    - **Methods**:
+        - `usePurchaseOrder()`: Fetches details of a specific purchase order based on its number.
+        - `useParams()`: Retrieves the purchase order number from the URL.
+
+- **AppointmentForm.tsx**
+    - **Purpose**: Form for scheduling appointments.
+    - **Methods**:
+        - `useAddAppointment()`: Handles the mutation for adding an appointment.
+        - `useState()`: Manages local state for appointment data.
+        - `handleChange()`: Updates state based on form input changes.
+        - `handleSubmit()`: Submits the form to schedule an appointment.
+
+- **RouteGuard.tsx**
+    - **Purpose**: Protects routes that require authentication.
+    - **Methods**:
+        - `useContext()`: Accesses the security context to check authentication status.
+        - `isAuthenticated()`: Checks if the user is authenticated.
+        - `login()`: Redirects to the login page if the user is not authenticated.
+
+- **Header.tsx**
+    - **Purpose**: Displays the header with user information and logout button.
+    - **Methods**:
+        - `useContext()`: Accesses the security context to get user information and logout function.
+        - `logout()`: Logs out the user.
+
+## Styling
+
+- **MUI**: Used for component styling and theming.
+- **SCSS**: Used for custom styles.
+
+## State Management and Re-rendering
+
+- **useState**: Used for managing local state within components.
+- **useEffect**: Used for side effects like data fetching and updating state based on dependencies.
+- **React Query**: Used for data fetching, caching, and synchronization.
+
+## Security
+
+- **Keycloak**: Used for authentication and authorization.
+- **SecurityContext**: Manages authentication state and provides login/logout functions.
+
+## Plugins and Dependencies
+
+- **@emotion/styled**
+- **@mui/material**
+- **@mui/x-date-pickers**
+- **@react-keycloak/web**
+- **@tanstack/react-query**
+- **axios**
+- **dayjs**
+- **keycloak-js**
+- **react**
+- **react-dom**
+- **react-jwt**
+- **react-router-dom**
+- **@eslint/js**
+- **@types/react**
+- **@types/react-dom**
+- **@vitejs/plugin-react**
+- **eslint**
+- **eslint-plugin-react-hooks**
+- **eslint-plugin-react-refresh**
+- **globals**
+- **sass-embedded**
+- **typescript**
+- **typescript-eslint**
+- **vite**
+
+## Environment Variables
+
+- **.env.development**: Contains environment variables for development.
+    - `VITE_BACKEND_URL`
+    - `VITE_KC_URL`
+    - `VITE_KC_REALM`
+    - `VITE_KC_CLIENT_ID`
+
+## Axios
+
+`axios` is a promise-based HTTP client for the browser and Node.js. It is used to make HTTP requests to the backend API.
+It supports features like interceptors, request and response transformation, and automatic JSON data transformation.
+
+## Conclusion
+
+This project demonstrates a comprehensive setup for a React application with TypeScript, Vite, MUI, SCSS, and various
+hooks and contexts for state management and data fetching. It also includes authentication using Keycloak and follows
+best practices for code organization and styling.
