@@ -135,8 +135,57 @@ for styling and SCSS for custom styles.
 
 ## Security
 
-- **Keycloak**: Used for authentication and authorization.
-- **SecurityContext**: Manages authentication state and provides login/logout functions.
+### Keycloak Integration
+
+This project uses Keycloak for authentication and authorization. Keycloak is an open-source Identity and Access
+Management (IAM) solution.
+
+#### Keycloak Configuration
+
+The Keycloak configuration is defined in the `SecurityContextProvider.tsx` file:
+
+```typescript
+const keycloakConfig = {
+    url: import.meta.env.VITE_KC_URL,
+    realm: import.meta.env.VITE_KC_REALM,
+    clientId: import.meta.env.VITE_KC_CLIENT_ID,
+};
+const keycloak: Keycloak = new Keycloak(keycloakConfig);
+```
+
+##### Security Context Provider
+
+The SecurityContextProvider component initializes Keycloak and manages the authentication state. It provides the
+following functions:
+
+- **login()**: Redirects the user to the Keycloak login page.
+- **logout()**: Logs out the user and redirects to the Keycloak logout page.
+- **isAuthenticated()**: Checks if the user is authenticated.
+
+The provider also sets up event handlers for Keycloak events such as authentication success, logout, error, and token
+expiration.
+
+##### Adding Access Token to Axios Requests
+
+The access token is added to the axios headers for authenticated API requests:
+
+```typescript
+export function addAccessTokenToAuthHeader(token: string | undefined) {
+    if (token) axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    else {
+        removeAccessTokenFromAuthHeader();
+    }
+}
+
+export function removeAccessTokenFromAuthHeader() {
+    delete axios.defaults.headers.common['Authorization'];
+}
+```
+
+##### Route Guard
+
+The RouteGuard component protects routes that require authentication. It checks if the user is authenticated and either
+renders the protected component or redirects to the login page.
 
 ## Plugins and Dependencies
 

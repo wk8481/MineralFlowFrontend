@@ -9,15 +9,15 @@ interface WarehouseProps {
 
 export function Warehouse({warehouse, isSelected}: WarehouseProps) {
     const navigate = useNavigate();
-    const fullness = (warehouse.currentCapacity / 400000) * 100;
+    const fullness = (warehouse.currentCapacity / 500000) * 100;
     let backgroundColor = 'green';
 
-    if (warehouse.currentCapacity > 440000) {
+    if (warehouse.currentCapacity > 550000) {
         // Trigger alert if above 440,000
-        alert("Capacity exceeds maximum allowed limit of 440,000. Adjust to continue.");
+        alert("Capacity exceeds maximum allowed limit of 55zzzzzzzzzzzzzzzz0,000. Adjust to continue.");
         return null;
     } else if (fullness > 100) {
-        backgroundColor = 'red'; // Overflow but under 440,000
+        backgroundColor = 'red'; // Overflow but under 550,000
     } else if (fullness === 100) {
         backgroundColor = 'pink'; // Exactly 100% full
     } else if (fullness > 80) {
