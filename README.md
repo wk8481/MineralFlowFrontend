@@ -227,6 +227,10 @@ renders the protected component or redirects to the login page.
 `axios` is a promise-based HTTP client for the browser and Node.js. It is used to make HTTP requests to the backend API.
 It supports features like interceptors, request and response transformation, and automatic JSON data transformation.
 
+## Pictures of the pages
+
+In the Pages folder you can find pictures of the pages of the application.
+
 ## Conclusion
 
 This project demonstrates a comprehensive setup for a React application with TypeScript, Vite, MUI, SCSS, and various

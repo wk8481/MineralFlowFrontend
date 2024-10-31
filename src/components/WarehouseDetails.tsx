@@ -1,4 +1,3 @@
-// src/components/WarehouseDetails.tsx
 import {useParams} from 'react-router-dom';
 import {Alert, Box, Card, CardContent, CircularProgress, Typography} from '@mui/material';
 import {useWarehouse} from '../hooks/useWarehouses';

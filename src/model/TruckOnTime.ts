@@ -1,4 +1,3 @@
-// src/model/TruckOnTime.ts
 export type TruckOnTime = {
     licensePlate: string;
     sellerId: string;

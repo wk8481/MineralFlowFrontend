@@ -1,4 +1,3 @@
-// src/model/Appointment.ts
 export type Appointment = {
     sellerId: string;
     licensePlate: string;

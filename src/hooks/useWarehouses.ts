@@ -1,4 +1,3 @@
-// src/hooks/useWarehouses.ts
 import {useQuery} from '@tanstack/react-query';
 import {getWarehouse, getWarehouses} from '../services/backend';
 import {Warehouse} from '../model/Warehouses';

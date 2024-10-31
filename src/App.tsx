@@ -1,4 +1,3 @@
-// src/App.tsx
 import {BrowserRouter, Link, Navigate, Route, Routes} from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import TruckOnSiteCounter from './components/TruckOnSiteCounter';
@@ -14,7 +13,7 @@ import TruckTable from "./components/TruckTable";
 import TruckDetails from "./components/TruckDetails";
 import WarehouseList from './components/WarehouseList';
 import WarehouseDetails from './components/WarehouseDetails';
-import {AppointmentForm} from './components/AppointmentForm'; // Import the component
+import {AppointmentForm} from './components/AppointmentForm';
 
 const queryClient = new QueryClient();
 const theme = createTheme({

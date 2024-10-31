@@ -14,7 +14,7 @@ export function Warehouse({warehouse, isSelected}: WarehouseProps) {
 
     if (warehouse.currentCapacity > 550000) {
         // Trigger alert if above 440,000
-        alert("Capacity exceeds maximum allowed limit of 55zzzzzzzzzzzzzzzz0,000. Adjust to continue.");
+        alert("Capacity exceeds maximum allowed limit of 550,000. Adjust to continue.");
         return null;
     } else if (fullness > 100) {
         backgroundColor = 'red'; // Overflow but under 550,000

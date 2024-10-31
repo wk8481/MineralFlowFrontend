@@ -1,4 +1,3 @@
-// src/hooks/usePurchaseOrders.ts
 import {useQuery} from '@tanstack/react-query';
 import {getPurchaseOrder, getPurchaseOrders} from '../services/backend';
 import {PurchaseOrder} from "../model/PurchaseOrders.ts";

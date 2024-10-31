@@ -1,4 +1,3 @@
-// src/hooks/useAppointments.ts
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {makeAppointment} from '../services/backend';
 import {Appointment} from '../model/Appointments.ts';

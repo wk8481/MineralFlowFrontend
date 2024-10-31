@@ -1,4 +1,3 @@
-// src/components/WarehouseList.tsx
 import {useState} from 'react';
 import {Alert, Box, CircularProgress, Typography} from '@mui/material';
 import {useWarehouses} from '../hooks/useWarehouses';

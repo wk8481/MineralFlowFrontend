@@ -1,4 +1,3 @@
-// src/model/PurchaseOrder.ts
 export interface OrderLine {
     materialType: string;
     amountInTons: number;

@@ -1,4 +1,3 @@
-// src/components/AppointmentForm.tsx
 import {useState} from 'react';
 import {Button, Paper, Stack, TextField} from '@mui/material';
 import {useAddAppointment} from '../hooks/useAddAppointment.ts';
