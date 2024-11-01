@@ -22,7 +22,16 @@ export function AppointmentForm() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        addAppointment(appointmentData);
+
+        // Default to current time and one hour later if start/end times are not set
+        const now = new Date();
+        const defaultStart = now.toISOString().slice(0, 16); // Current time
+        const defaultEnd = new Date(now.getTime() + 60 * 60 * 1000).toISOString().slice(0, 16); // One hour later
+
+        const appointmentWindowStart = appointmentData.appointmentWindowStart || defaultStart;
+        const appointmentWindowEnd = appointmentData.appointmentWindowEnd || defaultEnd;
+
+        addAppointment({...appointmentData, appointmentWindowStart, appointmentWindowEnd});
     };
 
     return (
@@ -60,7 +69,6 @@ export function AppointmentForm() {
                         onChange={handleChange}
                         label="Appointment Start"
                         variant="outlined"
-                        required
                     />
                     <TextField
                         name="appointmentWindowEnd"
@@ -69,7 +77,6 @@ export function AppointmentForm() {
                         onChange={handleChange}
                         label="Appointment End"
                         variant="outlined"
-                        required
                     />
                     <Button variant="contained" color="primary" type="submit" disabled={isPending}>
                         {isPending ? 'Scheduling...' : 'Schedule Appointment'}

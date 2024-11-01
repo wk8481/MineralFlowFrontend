@@ -20,7 +20,7 @@ export async function getTrucksOnTime() {
 
 export async function getTruckOnTime(licensePlate: string): Promise<TruckOnTime> {
     try {
-        const {data: truckOnTime} = await axios.get<TruckOnTime>(`${BACKEND_URL}/check-arrival/${licensePlate}`);
+        const {data: truckOnTime} = await axios.get<TruckOnTime>(`${BACKEND_URL}/check-arrival/license-plate/${licensePlate}`);
         console.log('Fetched truck:', truckOnTime);
         return truckOnTime;
     } catch (error) {
